@@ -1,4 +1,5 @@
 from scapy.all import *
+import socket
 
 def getFilter():
     """Builds the libpcap filter expression
@@ -76,8 +77,36 @@ def modify1337(packet):
         packet.getlayer(Raw).load = packet.getlayer(Raw).load.replace("e", "33")
     return packet
 
-def arpTable():
-    arping(re.sub(r"\d+$", "*", get_if_addr(scapy.main.conf.iface)))
+def arpTable(quiet=False):
+    """ARP-scans local /24 for hosts and prints MAC and IP addresses
+    
+    If called with quite=True, nothing is printed, instead a list of hosts is
+    returned. (List of (mac, ip) tuples)
+    
+    The local network card is included in the textual output, but not in the
+    returned list."""
+    
+    netmask = re.sub(r"\d+$", "*", get_if_addr(scapy.main.conf.iface))
+    answers = arping(netmask, verbose=False)[0]
+    hosts = [(res[Ether].src, res[ARP].psrc) for req,res in answers]
+    hosts.sort(key=lambda x: x[1])
+    
+    if quiet:
+        return hosts
+    
+    def out(mac, ip):
+        try:
+            hostname = socket.gethostbyaddr(ip)[0]
+        except socket.herror:
+            hostname = "-"
+        print "%17s | %15s | %s"%(mac, ip, hostname)
+    
+    for mac, ip in hosts:
+        out(mac, ip)
+    print
+    out(get_if_hwaddr(scapy.main.conf.iface),
+        get_if_addr(scapy.main.conf.iface))
+    
+    return
 
 # vim:set ts=4 sw=4 et:
-
