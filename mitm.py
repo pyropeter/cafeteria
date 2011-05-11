@@ -76,6 +76,8 @@ def modify1337(packet):
         packet.getlayer(Raw).load = packet.getlayer(Raw).load.replace("e", "33")
     return packet
 
-#startForwarding()
+def arpTable():
+    arping(re.sub(r"\d+$", "*", get_if_addr(scapy.main.conf.iface)))
 
 # vim:set ts=4 sw=4 et:
+
