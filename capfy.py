@@ -8,15 +8,15 @@ print "Skript gestartet..\n\n"
 
 def handleCLargs():
     for args in sys.argv:
-	    if len(sys.argv) != 1:
-	        if args == "-c":
-	            showConfig()
-	        elif args == "-v":
-	            showVersion()
-	        else:
-	            doNothing()
-	    else:
-	        noArgs()
+        if len(sys.argv) != 1:
+            if args == "-c":
+                showConfig()
+            elif args == "-v":
+                showVersion()
+            else:
+                doNothing()
+        else:
+            noArgs()
 
 
 def showConfig():
