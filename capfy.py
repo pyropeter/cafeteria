@@ -7,11 +7,11 @@ print "Skript gestartet..\n\n"
 
 
 def handleCLargs():
-    for args in sys.argv:
+    for arg in sys.argv:
         if len(sys.argv) != 1:
-            if args == "-c":
+            if arg == "-c":
                 showConfig()
-            elif args == "-v":
+            elif arg == "-v":
                 showVersion()
             else:
                 doNothing()
