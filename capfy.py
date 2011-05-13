@@ -6,39 +6,39 @@ import sys
 print "Skript gestartet..\n\n"
 
 
-def handle_cl_args():
+def handleCLargs():
     for args in sys.argv:
 	    if len(sys.argv) != 1:
 	        if args == "-c":
-	            show_config()
+	            showConfig()
 	        elif args == "-v":
-	            show_version()
+	            showVersion()
 	        else:
-	            do_nothing()
+	            doNothing()
 	    else:
-	        no_args()
+	        noArgs()
 
 
-def show_config():
+def showConfig():
     print "Aktuelle Konfiguration:\n"
     print conf
     print "\n\n"
     
 
-def show_version():
+def showVersion():
     print "Aktuelle Version:\n"
     print "0.1"
     print "\n\n"
     
-def no_args():
+def noArgs():
     print "You need to enter some arguments...\n"
     
     
-def do_nothing():
+def doNothing():
     print ""
     
     
-handle_cl_args()
+handleCLargs()
 
 
 # vim:set ts=4 sw=4 et:
