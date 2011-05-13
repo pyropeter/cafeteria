@@ -1,7 +1,9 @@
 from scapy.all import *
 # Useful stuff
-import mitm
-import sys
+import mitm, sys, random
+
+
+jetzig = ["Current","Actual","Latest","Prevailing","Up-to-date"]
 
 print "Script started...\n\n"
 
@@ -20,13 +22,13 @@ def handleCLargs():
 
 
 def showConfig():
-    print "Actual configuration:\n"
+    print j()+" configuration:\n"
     print conf
     print "\n\n"
     
 
 def showVersion():
-    print "Actual version:\n"
+    print j()+" version:\n"
     print "0.1"
     print "\n\n"
     
@@ -40,7 +42,10 @@ def noArgs():
 def doNothing():
     print ""
     
+def j():
+    return jetzig[random.randint(0,4)]
     
+
 handleCLargs()
 
 
