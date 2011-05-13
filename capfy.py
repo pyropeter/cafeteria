@@ -32,6 +32,9 @@ def showVersion():
     
 def noArgs():
     print "You need to enter some arguments...\n"
+    print "Aviable arguments:\n"
+    print "-c - Shows your current configuration\n"
+    print "-v - Shows current version\n"
     
     
 def doNothing():
