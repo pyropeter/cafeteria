@@ -15,6 +15,10 @@ def handleCLargs():
                 showConfig()
             elif arg == "-v":
                 showVersion()
+            elif arg == "-a":
+                arpNetwork()
+            elif arg == "-s":
+                sniffAndForward()
             else:
                 doNothing()
         else:
@@ -36,12 +40,24 @@ def noArgs():
     print "You need to enter some arguments...\n"
     print "Available arguments:"
     print "-c - Shows your current configuration"
-    print "-v - Shows current version\n"
+    print "-v - Shows current version"
+    print "-a - Shows connected devices (ARP-Table-Style, requires root)"
+    print "-s - Sniffes traffic and forwards, otherwise dropped, packets\n"
     
     
 def doNothing():
     print ""
     
+    
+def arpNetwork():
+	mitm.arpTable()
+    
+    
+def sniffAndForward():
+	mitm.startForwarding()    
+    
+    
+
 def j():
     return jetzig[random.randint(0,4)]
     
