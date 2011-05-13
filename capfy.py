@@ -3,7 +3,7 @@ from scapy.all import *
 import mitm
 import sys
 
-print "Skript gestartet..\n\n"
+print "Script started...\n\n"
 
 
 def handleCLargs():
@@ -20,13 +20,13 @@ def handleCLargs():
 
 
 def showConfig():
-    print "Aktuelle Konfiguration:\n"
+    print "Actual configuration:\n"
     print conf
     print "\n\n"
     
 
 def showVersion():
-    print "Aktuelle Version:\n"
+    print "Actual version:\n"
     print "0.1"
     print "\n\n"
     
