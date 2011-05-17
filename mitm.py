@@ -109,4 +109,21 @@ def arpTable(quiet=False):
     
     return
 
+def modifyTCPRedirect(packet):
+    if not (packet.haslayer(IP) and packet.haslayer(TCP)):
+    	return packet
+    
+    redirects = [
+        (('213.239.207.134', 80), ('127.0.0.1', 50080))
+    ]
+    for real, fake in redirects:
+        if (packet[IP].dst, packet[TCP].dport) == real:
+            packet[IP].dst = fake[0]
+            packet[TCP].dport = fake[1]
+        elif (packet[IP].src, packet[TCP].sport) == fake:
+            packet[IP].src = real[0]
+            packet[TCP].sport = real[1]
+    packet.summary()
+    return packet
+
 # vim:set ts=4 sw=4 et:
